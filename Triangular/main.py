@@ -1,19 +1,25 @@
-# list = []
-# for i in range(50):
-#     list.append(i+1)
+a = input('Type numbers: ')
+a = list(a.split(' '))
+a = [int(x) for x in a]
+a.sort(reverse=True)
 
-# list.sort(reverse=True)
-# first = list[0]
-# second = list[1]
-# s = 0
-# p = 0
-# s_max = 0
-# maxim = []
-# for i in range(2, len(list)):
-#     if second + list[i] > first and first + second > list[i] and first + list[i] > second:
-#         p = (first + second + list[i]) / 2
-#         s = (p*(p-first)*(p-second)*(p-list[i])) ** 0.5
-#         maxim = [first, second, list[i]]
-#         break
+m = {'1': 0, '2': 0, '3': 0}
 
-# print(s, "  ", maxim)
+s = 0  # Площадь
+p = 0  # Периметр
+
+for i in range(2, len(a)):
+    if a[i - 1] + a[i] > a[i - 2] and a[i - 2] + a[i] > a[i - 1] and a[i - 2] + a[i - 1] > a[i]:
+        p = (a[i] + a[i - 1] + a[i - 2]) / 2
+        s = (p * (p - a[i]) * (p - a[i - 1]) * (p - a[i - 2])) ** 0.5
+
+        m['1'] = a[i]
+        m['2'] = a[i - 1]
+        m['3'] = a[i - 2]
+        break
+
+if s > 0:
+    print("Maximum area: ", a)
+    print("Sides: ", m)
+else:
+    print("No way")
